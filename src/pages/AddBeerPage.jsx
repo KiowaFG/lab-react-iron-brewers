@@ -22,6 +22,29 @@ function AddBeerPage() {
   const handleContributedBy = (e) => setContributedBy(e.target.value);
 
 
+  
+  
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const newBeer = {
+      name,
+      tagline,
+      description,
+      imageUrl,
+      firstBrewed,
+      brewersTips,
+      attenuationLevel,
+      contributedBy,
+  
+    }
+    fetch ('https://ih-beers-api2.herokuapp.com/beers/new', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json",},
+      body: JSON.stringify(newBeer)
+
+    })
+  }
+
 
   // TASK:
   // 1. Create a function to handle the form submission and send the form data to the Beers API to create a new beer.
@@ -34,7 +57,7 @@ function AddBeerPage() {
   return (
     <>
       <div className="d-inline-flex flex-column w-100 p-4">
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>Name</label>
           <input
             className="form-control mb-4"
